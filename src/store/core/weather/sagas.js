@@ -12,11 +12,9 @@ import { selectCurrentCity } from 'Core/location/selectors'
 import * as actions from './actions'
 
 export function * getCurrentLocationWeatherSaga () {
-  let todayForecast, weekForecast
-
   yield call(getCurrentLocationSaga)
-  yield call(getCurrentLocationWeather)
-  yield call(getCurrentLocationForecast)
+  const todayForecast = yield call(getCurrentLocationWeather)
+  const weekForecast = yield call(getCurrentLocationForecast)
 
   const currentCity = yield select(selectCurrentCity)
   yield put(actions.setCityWeather({
